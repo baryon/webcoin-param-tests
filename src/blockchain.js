@@ -9,7 +9,7 @@ module.exports = function (params, test) {
     t.test('create SPV Blockchain', (t) => {
       var db = createDb()
       try {
-        chain = new Blockchain(params, db)
+        chain = new Blockchain(params.blockchain, db)
         t.pass('did not throw')
         t.ok(chain, 'Blockchain created')
         chain.once('ready', () => {
@@ -24,7 +24,7 @@ module.exports = function (params, test) {
 
     t.test('get genesis block', (t) => {
       var genesis = new Block()
-      Object.assign(genesis, params.genesisHeader)
+      Object.assign(genesis, params.blockchain.genesisHeader)
 
       chain.getBlock(genesis.getHash(), (err, block) => {
         t.ok('getBlock callback called')
@@ -38,7 +38,7 @@ module.exports = function (params, test) {
 
     t.test('miningHash', (t) => {
       var genesis = new Block()
-      Object.assign(genesis, params.genesisHeader)
+      Object.assign(genesis, params.blockchain.genesisHeader)
 
       t.test('genesis header has valid proof', (t) => {
         chain.validProof(genesis, (err, valid) => {
