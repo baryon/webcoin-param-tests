@@ -34,7 +34,7 @@ module.exports = function (params, test) {
       var db = createDb()
       var chain = new Blockchain(params.blockchain, db)
       var start = chain.getTip()
-      var syncN = 5000
+      var syncN = 3000
       chain.on('error', (err) => t.error(err))
 
       var headers = peers.createHeaderStream({ locator: [ start.hash ] })
