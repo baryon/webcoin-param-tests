@@ -34,25 +34,26 @@ module.exports = function (params, test) {
       var db = createDb()
       var chain = new Blockchain(params.blockchain, db)
       var start = chain.getTip()
-      var syncN = 6000
+      var syncN = 5000
       chain.on('error', (err) => t.error(err))
 
       var headers = peers.createHeaderStream({ locator: [ start.hash ] })
-      var chainStream = chain.createWriteStream()
-      chain.on('block', (block) => {
+      var onBlock = (block) => {
         var i = block.height - start.height
         if (i % 100 === 0) {
           t.ok(block, `sync progress: ${i}/${syncN}`)
         }
         if (i < syncN) return
         t.pass('done syncing')
+        chain.removeListener('block', onBlock)
         headers.once('end', () => {
           t.pass('HeaderStream ended')
           t.end()
         })
         headers.end()
-      })
-      headers.pipe(chainStream)
+      }
+      chain.on('block', onBlock)
+      headers.pipe(chain.createWriteStream())
     })
 
     t.test('disconnect', (t) => {
