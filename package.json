@@ -24,7 +24,7 @@
     "bitcoin-net": "^2.2.0",
     "bitcoinjs-lib": "^2.2.0",
     "blockchain-spv": "^1.0.3",
-    "levelup": "^1.3.1",
+    "levelup": "^1.3.2",
     "memdown": "^1.1.2"
   },
   "devDependencies": {
