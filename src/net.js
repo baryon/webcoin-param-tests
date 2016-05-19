@@ -37,7 +37,8 @@ module.exports = function (params, test) {
       var syncN = 3000
       chain.on('error', (err) => t.error(err))
 
-      var headers = peers.createHeaderStream({ locator: [ start.hash ] })
+      var locators = chain.createLocatorStream()
+      var headers = peers.createHeaderStream()
       var onBlock = (block) => {
         var i = block.height - start.height
         if (i % 100 === 0) {
@@ -53,7 +54,7 @@ module.exports = function (params, test) {
         headers.end()
       }
       chain.on('block', onBlock)
-      headers.pipe(chain.createWriteStream())
+      locators.pipe(headers).pipe(chain.createWriteStream())
     })
 
     t.test('disconnect', (t) => {
