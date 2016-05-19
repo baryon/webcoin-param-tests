@@ -1,8 +1,9 @@
 var Blockchain = require('blockchain-spv')
-var Block = require('bitcoinjs-lib').Block
+var DefaultBlock = require('bitcoinjs-lib').Block
 var createDb = require('./common.js').createDb
 
 module.exports = function (params, test) {
+  var Block = params.Block || DefaultBlock
   var chain
 
   test('blockchain', (t) => {
