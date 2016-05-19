@@ -1,6 +1,6 @@
 {
   "name": "webcoin-param-tests",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Tests for webcoin cryptocurrency parameters",
   "main": "index.js",
   "scripts": {
