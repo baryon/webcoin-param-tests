@@ -1,5 +1,6 @@
 var Blockchain = require('blockchain-spv')
 var DefaultBlock = require('bitcoinjs-lib').Block
+var assign = require('object-assign')
 var createDb = require('./common.js').createDb
 
 module.exports = function (params, test) {
@@ -25,7 +26,7 @@ module.exports = function (params, test) {
 
     t.test('get genesis block', (t) => {
       var genesis = new Block()
-      Object.assign(genesis, params.blockchain.genesisHeader)
+      assign(genesis, params.blockchain.genesisHeader)
 
       chain.getBlock(genesis.getHash(), (err, block) => {
         t.ok('getBlock callback called')
@@ -39,7 +40,7 @@ module.exports = function (params, test) {
 
     t.test('miningHash', (t) => {
       var genesis = new Block()
-      Object.assign(genesis, params.blockchain.genesisHeader)
+      assign(genesis, params.blockchain.genesisHeader)
 
       t.test('genesis header has valid proof', (t) => {
         chain.validProof(genesis, (err, valid) => {
