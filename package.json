@@ -28,7 +28,7 @@
     "memdown": "^1.1.2"
   },
   "devDependencies": {
-    "standard": "^6.0.8"
+    "standard": "^7.1.1"
   },
   "repository": {
     "type": "git",
