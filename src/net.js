@@ -4,7 +4,7 @@ var createDb = require('./common.js').createDb
 
 module.exports = function (params, test) {
   var peers
-  var numPeers = 6
+  var numPeers = 2
 
   test('networking', (t) => {
     t.test('create PeerGroup', (t) => {
