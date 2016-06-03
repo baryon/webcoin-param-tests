@@ -29,7 +29,7 @@
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "standard": "^6.0.8"
+    "standard": "^7.1.2"
   },
   "repository": {
     "type": "git",
