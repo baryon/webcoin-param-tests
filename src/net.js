@@ -1,6 +1,13 @@
 var PeerGroup = require('bitcoin-net').PeerGroup
 var Blockchain = require('blockchain-spv')
 var createDb = require('./common.js').createDb
+try {
+  var wrtc = require('wrtc')
+} catch (err) {
+  try {
+    wrtc = require('electron-webrtc')
+  } catch (err) {}
+}
 
 module.exports = function (params, test) {
   var peers
@@ -9,7 +16,7 @@ module.exports = function (params, test) {
   test('networking', (t) => {
     t.test('create PeerGroup', (t) => {
       try {
-        peers = new PeerGroup(params.net, { numPeers })
+        peers = new PeerGroup(params.net, { numPeers, wrtc })
         t.pass('did not throw')
         t.ok(peers, 'got PeerGroup')
         peers.on('error', (err) => t.error(err))
